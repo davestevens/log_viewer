@@ -1,0 +1,17 @@
+{
+  "name": "log_viewer",
+  "version": "0.0.0",
+  "author": "dave stevens",
+  "scripts": {
+    "start": "http-server",
+    "build": "coffee -cb app",
+    "build-watch": "coffee -wcb app"
+  },
+  "dependencies": {
+    "http-server": "^0.7.4"
+  },
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "coffee": "0.0.1"
+  }
+}
