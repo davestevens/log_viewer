@@ -32,6 +32,8 @@ define [
           values.push(value)
           "#{key}=?"
         ).join(" AND ")
+      sql += " LIMIT #{options.limit}" if options.limit
+      sql += " OFFSET #{options.offset}" if options.offset
       success = (_transaction, results) ->
         models = []
         models.push(results.rows.item(i)) for i in [0...results.rows.length]

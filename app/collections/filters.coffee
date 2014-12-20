@@ -4,3 +4,9 @@ define ["backbone", "models/filter"],
     model: Filter
 
     webSql: new Backbone.WebSql("filters", Filter)
+
+    build: ->
+      _.chain(@where(active: "true"))
+        .map((model) -> [model.get("name"), model.get("value")])
+        .object()
+        .value()

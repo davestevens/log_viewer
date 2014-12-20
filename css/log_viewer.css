@@ -5,3 +5,8 @@ body {
 .filters {
   margin-bottom: 10px;
 }
+
+.logs table td .params {
+  max-height: 70px;
+  overflow: auto;
+}
