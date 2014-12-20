@@ -4,8 +4,8 @@ define [
 ], (Backbone, Attributes) ->
   class Filter extends Backbone.Model
     defaults:
-      exclusive: null
-      inclusive: null
+      exclusive: new Attributes()
+      inclusive: new Attributes()
       from_date: null
       to_date: null
 
