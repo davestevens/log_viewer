@@ -1,4 +1,5 @@
-define ["backbone", "models/log"], (Backbone, Log) ->
+define ["backbone", "services/backbone.websql", "models/log"],
+(Backbone, BackboneWebSql, Log) ->
   class Logs extends Backbone.Collection
     model: Log
 
@@ -8,7 +9,9 @@ define ["backbone", "models/log"], (Backbone, Log) ->
       if model.get("datetime") instanceof Date
         model.get("datetime").getTime()
 
-    local: true
+    sync: BackboneWebSql.sync
+
+    webSql: new BackboneWebSql("logs", Log)
 
     filter: (filters) ->
       models = _.filter(_.clone(@models), (model) => @_filters(model, filters))
