@@ -10,6 +10,7 @@ define [
 
     events:
       "submit form": "_import_file"
+      "click .clear": "_empty_collection"
 
     template: _.template(Template)
 
@@ -20,9 +21,9 @@ define [
     _import_file: (event) ->
       event.preventDefault()
 
-      file = $("#import_file")[0].files[0]
-      return @_alert_no_file() unless file?
-      @_read_file(file)
+      files = $("#import_file")[0].files
+      return @_alert_no_file() unless files.length > 0
+      @_read_file(file) for file in files
 
     _alert_no_file: -> alert("You haven't chosen a file!")
 
@@ -30,11 +31,22 @@ define [
       reader = new FileReader()
 
       reader.onload = =>
-        @_empty_collection()
-        _(JSON.parse(reader.result)).each((log) => @collection.create(log))
+        for line in reader.result.split("\n")
+          log = _.object(@_key_value_matches(line))
+          continue if _.isEmpty(log)
+          log.datetime = line.match(@_datetime_regex)[0]
+          @collection.create(log)
         window.location.hash = "logs"
 
       reader.readAsText(file)
 
+    _key_value_matches: (line) ->
+      [match[1], match[2]] while match = @_key_value_regex.exec(line)
+
+    _key_value_regex: /(\w+)=((?!{)\S+|{.+})/g
+
+    _datetime_regex: /((\d+-?){3}T(\d+:?){3})\.\d+/
+
     _empty_collection: ->
       model.destroy() while model = @collection.first()
+      alert("Cleared all Logs")

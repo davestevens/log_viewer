@@ -49,3 +49,4 @@ define [
       filter: @filters.build()
       limit: @page_size
       offset: @page_size * @page
+      order: "datetime ASC"

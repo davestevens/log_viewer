@@ -32,6 +32,7 @@ define [
           values.push(value)
           "#{key}=?"
         ).join(" AND ")
+      sql += " ORDER BY #{options.order}" if options.order
       sql += " LIMIT #{options.limit}" if options.limit
       sql += " OFFSET #{options.offset}" if options.offset
       success = (_transaction, results) ->
