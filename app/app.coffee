@@ -1,4 +1,4 @@
-define ["marionette", "backbone-dualstorage"], (Marionette) ->
+define ["marionette", "services/backbone.webSql"], (Marionette) ->
   App = new Marionette.Application()
 
   App.addRegions(main: ".main")

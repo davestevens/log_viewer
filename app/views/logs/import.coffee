@@ -31,9 +31,7 @@ define [
 
       reader.onload = =>
         @_empty_collection()
-        _(JSON.parse(reader.result)).each((log) =>
-          @collection.create(log)
-        )
+        _(JSON.parse(reader.result)).each((log) => @collection.create(log))
         window.location.hash = "logs"
 
       reader.readAsText(file)

@@ -1,4 +1,4 @@
-define ["backbone", "services/backbone.websql"], (Backbone, BackboneWebSql) ->
+define ["backbone"], (Backbone) ->
   class Log extends Backbone.Model
     defaults:
       action: null
@@ -17,6 +17,4 @@ define ["backbone", "services/backbone.websql"], (Backbone, BackboneWebSql) ->
       user_id: null
       view: null
 
-    sync: BackboneWebSql.sync
-
-    webSql: new BackboneWebSql("logs", Log)
+    webSql: new Backbone.WebSql("logs", Log)

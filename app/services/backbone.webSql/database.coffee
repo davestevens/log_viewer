@@ -10,6 +10,7 @@ define ->
       @db = window.openDatabase(name, version, description, size)
 
     execute: (sql, values, success, error) ->
+      console.log "execute", sql, values
       @db.transaction( (tx) ->
         tx.executeSql(sql, values, success, error)
       )

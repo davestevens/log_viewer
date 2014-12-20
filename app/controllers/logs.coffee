@@ -1,11 +1,7 @@
 define [
-  "collections/logs",
-  "views/logs/index",
+  "views/logs/layout",
   "views/logs/import"
-], (Logs, LogsView, LogsImportView) ->
-  index: ->
-    logs = new Logs()
-    logs.fetch()
-    @view = new LogsView(collection: logs)
+], (LogsLayoutView, LogsImportView) ->
+  index: -> @view = new LogsLayoutView()
 
   import: -> @view = new LogsImportView()
